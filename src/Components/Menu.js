@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import {
   TextField, MenuItem, Card, CardHeader, CardContent, Hidden, CircularProgress, Button, SwipeableDrawer, Fab, Backdrop
 } from '@material-ui/core'
-import { sizes } from '../Options'
+import { sizes, colors } from '../Options'
 import SettingsIcon from '@material-ui/icons/Settings'
 import Typography from '@material-ui/core/Typography'
 import DrawerMenu from './DrawerMenu'
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column'
   },
   inputField: {
-    marginBottom: theme.spacing(3)
+    marginBottom: theme.spacing(3),
   },
   menu: {
     position: 'relative',
@@ -57,10 +57,20 @@ const useStyles = makeStyles((theme) => ({
       color: '#fff',
       flexDirection: 'column'
     }
+  },
+  colorItem: {
+    whiteSpace: 'nowrap',
+    justifyContent: 'space-between'
+  },
+  colorImage: {
+    display: 'inline',
+    padding: 0,
+    marginRight: theme.spacing(5),
+    marginLeft: theme.spacing(4),
   }
 }))
 
-const Menu = ({ mag, setMag, pinholes, setPinholes, iterations, setIterations, diffuse, setDiffuse, loading, setLoading }) => {
+const Menu = ({ mag, setMag, pinholes, setPinholes, iterations, setIterations, color, setColor, diffract, setDiffract, loading, setLoading }) => {
   const classes = useStyles()
 
   const [drawer, setDrawer] = useState(false)
@@ -75,7 +85,7 @@ const Menu = ({ mag, setMag, pinholes, setPinholes, iterations, setIterations, d
   const handleSubmit = (event) => {
     event.preventDefault()
     setLoading(true)
-    setTimeout(() => setDiffuse(diffuse += 1)
+    setTimeout(() => setDiffract(diffract += 1)
     , 500)
   }
 
@@ -103,15 +113,15 @@ const Menu = ({ mag, setMag, pinholes, setPinholes, iterations, setIterations, d
             setPinholes={setPinholes}
             iterations={iterations}
             setIterations={setIterations}
-            diffuse={diffuse}
-            setDiffuse={setDiffuse}
+            diffract={diffract}
+            setDiffract={setDiffract}
             loading={loading}
             setLoading={setLoading}
             setDrawer={setDrawer}
           />
         </SwipeableDrawer>
       </Hidden>
-      <Hidden xsDown>
+      <Hidden smDown>
         <Card className={classes.menu} elevation={0} square>
           <CardHeader className={classes.titleHeader} title={
             <div>
@@ -164,6 +174,21 @@ const Menu = ({ mag, setMag, pinholes, setPinholes, iterations, setIterations, d
                 variant="outlined"
                 onChange={(e) => setIterations(e.target.value)}
               />
+              <TextField
+                className={classes.inputField}
+                id="color-select"
+                select
+                label="Colors"
+                value={color}
+                variant="outlined"
+                onChange={(e) => setColor(e.target.value)}
+                >
+                  {colors.map((option) => (
+                  <MenuItem className={classes.colorItem} key={option.value} value={option.value}>
+                      <div>{option.value}</div> <img className={classes.colorImage} src={`data:image/png;base64, ${option.image}`} align="right"/>
+                  </MenuItem>
+                  ))}
+              </TextField>
               <Button
                 className={classes.generateButton}
                 type="submit"

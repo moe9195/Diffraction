@@ -25,8 +25,9 @@ const Diffraction = () => {
   const [mag, setMag] = useState(6)
   const [pinholes, setPinholes] = useState(4)
   const [iterations, setIterations] = useState(10)
-  const [diffuse, setDiffuse] = useState(0)
+  const [diffract, setDiffract] = useState(0)
   const [loading, setLoading] = useState(false)
+  const [color, setColor] = useState('jet')
 
   return (
     <div className={classes.root}>
@@ -35,7 +36,8 @@ const Diffraction = () => {
           mag={mag}
           pinholes={pinholes}
           iterations={iterations}
-          diffuse={diffuse}
+          color={color}
+          diffract={diffract}
           loading={loading}
           setLoading={setLoading}
         />
@@ -46,8 +48,10 @@ const Diffraction = () => {
           setPinholes={setPinholes}
           iterations={iterations}
           setIterations={setIterations}
-          diffuse={diffuse}
-          setDiffuse={setDiffuse}
+          color={color}
+          setColor={setColor}
+          diffract={diffract}
+          setDiffract={setDiffract}
           loading={loading}
           setLoading={setLoading}
         />

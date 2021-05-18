@@ -36,14 +36,14 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const DrawerMenu = ({ mag, setMag, pinholes, setPinholes, iterations, setIterations, loading, setLoading, diffuse, setDiffuse, setDrawer }) => {
+const DrawerMenu = ({ mag, setMag, pinholes, setPinholes, iterations, setIterations, loading, setLoading, diffract, setDiffract, setDrawer }) => {
   const classes = useStyles()
 
   const handleSubmit = (event) => {
     event.preventDefault()
     setDrawer(false)
     setLoading(true)
-    setTimeout(() => setDiffuse(diffuse += 1)
+    setTimeout(() => setDiffract(diffract += 1)
     , 500)
   }
 

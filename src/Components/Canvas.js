@@ -1,8 +1,10 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { generatePattern } from '../Functions/diffraction.js'
-import Fab from '@material-ui/core/Fab'
+import { Fab, Hidden } from '@material-ui/core'
 import GetApp from '@material-ui/icons/GetApp'
+
+import colormap from 'colormap'
 
 const useStyles = makeStyles((theme) => ({
   centered: {
@@ -25,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const Canvas = ({ mag, pinholes, iterations, diffuse, setLoading }) => {
+const Canvas = ({ mag, pinholes, iterations, color, diffract, setLoading }) => {
   const classes = useStyles()
 
   const [rendered, setRendered] = useState(false)
@@ -49,10 +51,19 @@ const Canvas = ({ mag, pinholes, iterations, diffuse, setLoading }) => {
 
   useEffect(() => {
 
+    let colors = colormap({
+      colormap: color,
+      nshades: 256,
+      format: 'rba',
+      alpha: 1
+    })
+    
+    console.log(colors)
+
     const canvasResized = canvasRefResized.current
     const ctxResized = canvasResized.getContext('2d')
 
-    if (diffuse === 0) {
+    if (diffract === 0) {
       ctxResized.fillRect(0, 0, scaleFactor * width, scaleFactor * height)
     }
     else {
@@ -62,11 +73,14 @@ const Canvas = ({ mag, pinholes, iterations, diffuse, setLoading }) => {
       const imgData = ctx.createImageData(width, height)
       const data = imgData.data;
   
+      console.log(imgArr)
+      let rgb;
       let idx = 0
       for (let i = 0, len = width * height * 4; i < len; i += 4) {
-        data[i + 0] = imgArr[idx]
-        data[i + 1] = imgArr[idx]
-        data[i + 2] = imgArr[idx]
+        rgb = colors[Math.floor(imgArr[idx])]
+        data[i + 0] = rgb[0]
+        data[i + 1] = rgb[1]
+        data[i + 2] = rgb[2]
         data[i + 3] = 255
         idx += 1
       }
@@ -78,7 +92,7 @@ const Canvas = ({ mag, pinholes, iterations, diffuse, setLoading }) => {
       setRendered(true)
     }
 
-  }, [diffuse])
+  }, [diffract])
 
 
   return (
