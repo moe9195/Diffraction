@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignContent: 'center',
     flexDirection: 'row',
-    [theme.breakpoints.up('xs')]: {
+    [theme.breakpoints.up('sm')]: {
       paddingTop: theme.spacing(2),
     },
   },
@@ -27,7 +27,7 @@ const Diffraction = () => {
   const [iterations, setIterations] = useState(10)
   const [diffract, setDiffract] = useState(0)
   const [loading, setLoading] = useState(false)
-  const [color, setColor] = useState('jet')
+  const [color, setColor] = useState('greys')
 
   return (
     <div className={classes.root}>

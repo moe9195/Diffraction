@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import {
   TextField, MenuItem, Card, CardContent, CircularProgress, Button
 } from '@material-ui/core'
-import { sizes } from '../Options'
+import { sizes, colors } from '../Options'
 
 const useStyles = makeStyles((theme) => ({
   inputsDiv: {
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const DrawerMenu = ({ mag, setMag, pinholes, setPinholes, iterations, setIterations, loading, setLoading, diffract, setDiffract, setDrawer }) => {
+const DrawerMenu = ({ mag, setMag, pinholes, setPinholes, iterations, color, setColor, setIterations, setLoading, diffract, setDiffract, setDrawer }) => {
   const classes = useStyles()
 
   const handleSubmit = (event) => {
@@ -86,6 +86,21 @@ const DrawerMenu = ({ mag, setMag, pinholes, setPinholes, iterations, setIterati
             variant="outlined"
             onChange={(e) => setIterations(e.target.value)}
           />
+           <TextField
+            className={classes.inputField}
+            id="color-select"
+            select
+            label="Colors"
+            value={color}
+            variant="outlined"
+            onChange={(e) => setColor(e.target.value)}
+            >
+              {colors.map((option) => (
+              <MenuItem className={classes.colorItem} key={option.value} value={option.value}>
+                  <div>{option.value}</div> <img className={classes.colorImage} src={`data:image/png;base64, ${option.image}`} align="right"/>
+              </MenuItem>
+              ))}
+            </TextField>
           <Button
             className={classes.generateButton}
             type="submit"

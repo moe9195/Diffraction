@@ -1,7 +1,7 @@
 import * as array from './array.js'
 import { fft2 } from './fft.js'
 import {
-  matrix, sin, cos, subtract, add, dotPow, sqrt, dotDivide, complex, dotMultiply, exp, row, abs, re, im, max
+  matrix, sin, cos, subtract, add, dotPow, sqrt, dotDivide, complex, dotMultiply, exp, row, abs, re, im, max, sum
 } from 'mathjs'
 
 export const expr = (x, y, nnn) => {

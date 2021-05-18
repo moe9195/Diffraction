@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: -20
   },
   backdrop: {
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       zIndex: theme.zIndex.drawer + 1,
       color: '#fff',
       flexDirection: 'column'
@@ -91,7 +91,7 @@ const Menu = ({ mag, setMag, pinholes, setPinholes, iterations, setIterations, c
 
   return (
     <React.Fragment>
-      <Hidden smUp>
+      <Hidden mdUp>
         <Fab
           className={classes.drawerButton}
           aria-label="settings"
@@ -113,6 +113,8 @@ const Menu = ({ mag, setMag, pinholes, setPinholes, iterations, setIterations, c
             setPinholes={setPinholes}
             iterations={iterations}
             setIterations={setIterations}
+            color={color}
+            setColor={setColor}
             diffract={diffract}
             setDiffract={setDiffract}
             loading={loading}
@@ -130,6 +132,7 @@ const Menu = ({ mag, setMag, pinholes, setPinholes, iterations, setIterations, c
                 <ol>
                   <li>Choose the image resolution.</li>
                   <li>Choose number of pinholes and iterations.</li>
+                  <li>Choose the color map.</li>
                   <li>Click generate to generate the image.</li>
                 </ol>
                 </Typography>

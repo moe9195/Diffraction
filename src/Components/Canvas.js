@@ -1,9 +1,9 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { generatePattern } from '../Functions/diffraction.js'
-import { Fab, Hidden } from '@material-ui/core'
+import { brightnessFactor } from '../Functions/util'
+import { Fab } from '@material-ui/core'
 import GetApp from '@material-ui/icons/GetApp'
-
 import colormap from 'colormap'
 
 const useStyles = makeStyles((theme) => ({
@@ -11,10 +11,10 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
   },
   canvas: {
-    [theme.breakpoints.up('xs')]: {
+    [theme.breakpoints.up('sm')]: {
       height: theme.spacing(100),
     },
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down('sm')]: {
       height: '90vh'
     },
   },
@@ -50,15 +50,12 @@ const Canvas = ({ mag, pinholes, iterations, color, diffract, setLoading }) => {
   
 
   useEffect(() => {
-
     let colors = colormap({
       colormap: color,
       nshades: 256,
       format: 'rba',
       alpha: 1
     })
-    
-    console.log(colors)
 
     const canvasResized = canvasRefResized.current
     const ctxResized = canvasResized.getContext('2d')
@@ -73,18 +70,21 @@ const Canvas = ({ mag, pinholes, iterations, color, diffract, setLoading }) => {
       const imgData = ctx.createImageData(width, height)
       const data = imgData.data;
   
-      console.log(imgArr)
-      let rgb;
       let idx = 0
+      let rgb
+      let brightness
+      let keepBrightness = ['greys', 'bone', 'copper'].includes(color)
+
       for (let i = 0, len = width * height * 4; i < len; i += 4) {
         rgb = colors[Math.floor(imgArr[idx])]
-        data[i + 0] = rgb[0]
-        data[i + 1] = rgb[1]
-        data[i + 2] = rgb[2]
+        brightness = keepBrightness ? 1 : brightnessFactor(rgb)
+        data[i + 0] = brightness * rgb[0]
+        data[i + 1] = brightness * rgb[1]
+        data[i + 2] = brightness * rgb[2]
         data[i + 3] = 255
         idx += 1
       }
-  
+
       ctx.putImageData(imgData, 0, 0)
       ctxResized.drawImage(canvas, 0, 0, scaleSize * width, scaleSize * height, 0, 0, scaleFactor * width, scaleFactor * height)
       ctx.clearRect(0, 0, width, height)
