@@ -11,7 +11,7 @@ export function FFT(n) {
       }
   }
   if (this.levels === -1) {
-      throw "Length is not a power of 2";
+      throw new Error("Length is not a power of 2");
   }
   this.cosTable = new Array(n / 2);
   this.sinTable = new Array(n / 2);

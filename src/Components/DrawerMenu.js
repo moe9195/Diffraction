@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import {
-  TextField, MenuItem, Card, CardContent, CircularProgress, Button
+  TextField, MenuItem, Card, CardContent, Button
 } from '@material-ui/core'
 import { sizes, colors } from '../Options'
 
@@ -97,7 +97,7 @@ const DrawerMenu = ({ mag, setMag, pinholes, setPinholes, iterations, color, set
             >
               {colors.map((option) => (
               <MenuItem className={classes.colorItem} key={option.value} value={option.value}>
-                  <div>{option.value}</div> <img className={classes.colorImage} src={`data:image/png;base64, ${option.image}`} align="right"/>
+                  <div>{option.value}</div> <img className={classes.colorImage} src={`data:image/png;base64, ${option.image}`} align="right" alt="colormap"/>
               </MenuItem>
               ))}
             </TextField>

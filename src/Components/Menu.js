@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import {
   TextField, MenuItem, Card, CardHeader, CardContent, Hidden, CircularProgress, Button, SwipeableDrawer, Fab, Backdrop
@@ -76,7 +76,7 @@ const Menu = ({ mag, setMag, pinholes, setPinholes, iterations, setIterations, c
   const [drawer, setDrawer] = useState(false)
 
   const toggleDrawer = (open) => (event) => {
-    if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key == 'Shift')) {
+    if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
     setDrawer(open)
@@ -188,7 +188,7 @@ const Menu = ({ mag, setMag, pinholes, setPinholes, iterations, setIterations, c
                 >
                   {colors.map((option) => (
                   <MenuItem className={classes.colorItem} key={option.value} value={option.value}>
-                      <div>{option.value}</div> <img className={classes.colorImage} src={`data:image/png;base64, ${option.image}`} align="right"/>
+                      <div>{option.value}</div> <img className={classes.colorImage} src={`data:image/png;base64, ${option.image}`} align="right" alt="colormap"/>
                   </MenuItem>
                   ))}
               </TextField>
@@ -206,7 +206,7 @@ const Menu = ({ mag, setMag, pinholes, setPinholes, iterations, setIterations, c
       </Hidden>
       <Backdrop className={classes.backdrop} open={loading}>
         <CircularProgress size={24} color="inherit" className={classes.loading} />
-        <Typography variant="p">Generating</Typography>
+        <Typography>Generating</Typography>
       </Backdrop>
     </React.Fragment>
   )

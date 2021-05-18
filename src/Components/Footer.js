@@ -50,7 +50,7 @@ const Footer = () => {
   return (
     <div className={classes.root}>
       {links.map((link) => (
-        <Typography className={classes.linkTypography}>
+        <Typography className={classes.linkTypography} key={link.label}>
           <Link className={classes.link} href={link.src} target="_blank">
             {link.label}
           </Link>
