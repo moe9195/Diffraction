@@ -36,7 +36,7 @@ const links = [
   },
   {
     label: '@moerahmeh95',
-    src: 'https://www.moerahmeh.com/'
+    src: 'https://mrahmeh.netlify.app/'
   },
   {
     label: 'github',
