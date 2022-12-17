@@ -1,51 +1,51 @@
-import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
-import Link from '@material-ui/core/Link'
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import Link from "@material-ui/core/Link";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    [theme.breakpoints.down('sm')]: {
-      position: 'fixed',
+    [theme.breakpoints.down("sm")]: {
+      position: "fixed",
       bottom: 0,
       right: 0,
-      margin: theme.spacing(0)
+      margin: theme.spacing(0),
     },
-    [theme.breakpoints.up('md')]: {
-      display: 'flex',
-      justifyContent: 'center',
-      alignSelf: 'flex-end',
-      margin: theme.spacing(2)
+    [theme.breakpoints.up("md")]: {
+      display: "flex",
+      justifyContent: "center",
+      alignSelf: "flex-end",
+      margin: theme.spacing(2),
     },
   },
   linkTypography: {
-    [theme.breakpoints.up('md')]: {
-      marginRight: theme.spacing(1)
-    }
+    [theme.breakpoints.up("md")]: {
+      marginRight: theme.spacing(1),
+    },
   },
   link: {
-    color: '#ffffff',
-    opacity: 0.35
-  }
-}))
+    color: "#ffffff",
+    opacity: 0.35,
+  },
+}));
 
 const links = [
   {
-    label: '©2021',
-    src: ''
+    label: "©2021",
+    src: "",
   },
   {
-    label: '@moerahmeh95',
-    src: 'https://mrahmeh.netlify.app/'
+    label: "@moerahmeh95",
+    src: "https://mrahmeh.netlify.app/",
   },
   {
-    label: 'github',
-    src: 'https://github.com/moe9195'
+    label: "github",
+    src: "https://github.com/moe9195",
   },
-]
+];
 
 const Footer = () => {
-  const classes = useStyles()
+  const classes = useStyles();
 
   return (
     <div className={classes.root}>
@@ -55,11 +55,9 @@ const Footer = () => {
             {link.label}
           </Link>
         </Typography>
-        )
-      )}
-   </div>
-  )
-}
-
+      ))}
+    </div>
+  );
+};
 
 export default Footer;
